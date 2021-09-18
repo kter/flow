@@ -1,0 +1,2 @@
+class UserFlowStatus < ApplicationRecord
+end
