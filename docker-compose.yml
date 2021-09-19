@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    # image: postgres:11.1
+    image: mysql:5.7.23
+    env_file: .env
+    volumes:
+      # - ./psql-data:/var/lib/pgsql
+      - ./mysql-data:/var/lib/mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    tty: true
+    stdin_open: true
+    env_file:
+      - .env
+    command: bundle exec rails s -p 8080 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+    driver: local
