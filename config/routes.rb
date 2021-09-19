@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'flows', to: 'flows#index'
   get 'flows/index'
   get 'flows/index'
   get 'flows/show'
