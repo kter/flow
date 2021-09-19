@@ -12,33 +12,33 @@
 
 ActiveRecord::Schema.define(version: 2021_09_18_171915) do
 
-  create_table "groups", force: :cascade do |t|
+  create_table "groups", charset: "utf8", force: :cascade do |t|
     t.string "name"
-    t.integer "Tflow_id", null: false
+    t.bigint "tflow_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["Tflow_id"], name: "index_groups_on_Tflow_id"
+    t.index ["tflow_id"], name: "index_groups_on_tflow_id"
   end
 
-  create_table "tasks", force: :cascade do |t|
+  create_table "tasks", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "tflows", force: :cascade do |t|
+  create_table "tflows", charset: "utf8", force: :cascade do |t|
     t.string "name"
-    t.integer "task_id", null: false
+    t.bigint "task_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["task_id"], name: "index_tflows_on_task_id"
   end
 
-  create_table "user_flow_statuses", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "tflow_id"
-    t.integer "task_id"
+  create_table "user_flow_statuses", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "tflow_id"
+    t.bigint "task_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["task_id"], name: "index_user_flow_statuses_on_task_id"
@@ -46,17 +46,17 @@ ActiveRecord::Schema.define(version: 2021_09_18_171915) do
     t.index ["user_id"], name: "index_user_flow_statuses_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "name"
-    t.integer "group_id", null: false
-    t.integer "tflow_id", null: false
+    t.bigint "group_id", null: false
+    t.bigint "tflow_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["tflow_id"], name: "index_users_on_tflow_id"
   end
 
-  add_foreign_key "groups", "Tflows"
+  add_foreign_key "groups", "tflows"
   add_foreign_key "tflows", "tasks"
   add_foreign_key "users", "groups"
   add_foreign_key "users", "tflows"
