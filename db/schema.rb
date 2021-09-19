@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_18_171915) do
+ActiveRecord::Schema.define(version: 2021_09_19_084603) do
 
   create_table "groups", charset: "utf8", force: :cascade do |t|
     t.string "name"
@@ -25,14 +25,15 @@ ActiveRecord::Schema.define(version: 2021_09_18_171915) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "tflow_id", null: false
+    t.index ["tflow_id"], name: "index_tasks_on_tflow_id"
   end
 
   create_table "tflows", charset: "utf8", force: :cascade do |t|
     t.string "name"
-    t.bigint "task_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["task_id"], name: "index_tflows_on_task_id"
+    t.text "description"
   end
 
   create_table "user_flow_statuses", charset: "utf8", force: :cascade do |t|
@@ -57,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_09_18_171915) do
   end
 
   add_foreign_key "groups", "tflows"
-  add_foreign_key "tflows", "tasks"
+  add_foreign_key "tasks", "tflows"
   add_foreign_key "users", "groups"
   add_foreign_key "users", "tflows"
 end
