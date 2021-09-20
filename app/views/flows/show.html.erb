@@ -1,6 +1,7 @@
 <h1>Flows#show</h1>
 
 <h2><%= @flow.name %></h2>
+<%= link_to 'Edit', controller: 'flows', action: 'edit', id: @flow.id %>
 <div><%= @flow.description %></div>
 
 <% @flow.task.each do |task| %>

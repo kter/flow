@@ -1,7 +1,7 @@
 <h1>Flows#index</h1>
 
 <% @flow.each do |flow| %>
-  <h2><%= link_to flow.name, controller: "flows", action: "show", id: flow.id %></h2>
+  <h2><%= link_to flow.name, flow_path(flow.id) %></h2>
   <% flow.task.each do |task| %>
     <h3><%= task.name %></h3>
   <% end %>

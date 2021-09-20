@@ -1,2 +1,39 @@
 <h1>Flows#edit</h1>
-<p>Find me in app/views/flows/edit.html.erb</p>
+  <%= form_with(model: @flow, local: true, url: flow_path(@flow.id)) do |form| %>
+    <% if @flow.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@flow.errors.count, "error") %> prohibited this zen from being saved:</h2>
+
+        <ul>
+        <% @flow.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :name, "名前" %>
+      <%= form.text_area :name %>
+    </div>
+    <div class="field">
+      <%= form.label :description, "内容" %>
+      <%= form.text_area :description %>
+    </div>
+    
+    <%= form.fields_for(:task) do |task| %>
+      <div class="field">
+        <%= task.label :name, "名前" %>
+        <%= task.text_area :name %>
+      </div>
+      <div class="field">
+        <%= task.label :description, "内容" %>
+        <%= task.text_area :description %>
+      </div>
+    <% end %>
+
+
+    <div class="actions">
+      <%= form.submit "更新" %>
+    </div>
+  <% end %>
