@@ -4,6 +4,7 @@ class FlowsController < ApplicationController
   end
 
   def show
+    @flow = Tflow.find(params['id'])
   end
 
   def new

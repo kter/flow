@@ -1,2 +1,9 @@
 <h1>Flows#show</h1>
-<p>Find me in app/views/flows/show.html.erb</p>
+
+<h2><%= @flow.name %></h2>
+<div><%= @flow.description %></div>
+
+<% @flow.task.each do |task| %>
+  <h3><%= task.name %></h3>
+  <div><%= task.description %></div>
+<% end %>
