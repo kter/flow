@@ -1,8 +1,6 @@
 class FlowsController < ApplicationController
   def index
-  end
-
-  def index
+    @flow = Tflow.all().eager_load(:task)
   end
 
   def show
