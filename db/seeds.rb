@@ -6,19 +6,19 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-for flow_id in 1...3 do
+for flow_id in 3.times do
     Tflow.create(
         [
-            name: 'flow' + flow_id,
-            description: 'flow' + flow_id
+            name: 'flow' + flow_id.to_s,
+            description: 'flow' + flow_id.to_s
         ]
     )
     
-    for task_id in 1...10 do
+    for task_id in 10.times do
         Task.create(
             [
-              name: 'task' + task_id,
-              description: 'description' + task_id,
+              name: 'task' + flow_id.to_s + '-' + task_id.to_s,
+              description: 'description' + flow_id.to_s + '-' + task_id.to_s,
               tflow_id: flow_id
             ]
         )
